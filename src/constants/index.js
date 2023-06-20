@@ -1,13 +1,5 @@
-const process = require("process");
-require("dotenv").config();
-const{
-	MONGODB_URI,
-	PORT
-} = process.env;
-const commonConstants = {
-	MONGODB_URI,
-	PORT
-};
+const { commonConstants } = require("./common.js");
+
 module.exports = {
 	commonConstants
 };
