@@ -37,7 +37,7 @@ const createUser = async(req, res) => {
 		let token = jwt.sign({ userExist }, SECRET_KEY , {expiresIn:"600s"});
 		await newEmployee.save()
 			.then((savedUser) => {
-				return response.success(res, "employee successfully signed in", [savedUser, {tkeon:token}]);
+				return response.success(res, "employee successfully signed in", [savedUser, {token:token}]);
 			});
 
 		

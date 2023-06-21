@@ -2,9 +2,9 @@ const { User } = require("../models/User");
 const { USER_KEYS } = require("../../constants/models/user");
 const response = require("../../modules/response");
 const joiSchema = require("../../middlewares/joiValidation");
-// const {commonConstants} = require("../../constants/index");
+const {commonConstants} = require("../../constants/index");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const loginUser = async(req, res) => {
 	try {
 		let { email, password} = req.body;
@@ -28,15 +28,13 @@ const loginUser = async(req, res) => {
 		}
 		bcrypt.compare(password, findUser.password, (err, result) => {
 			if (result) {
-				return response.success(res, "successfully login", findUser);
+				const {SECRET_KEY} = commonConstants;
+				let token = jwt.sign({ findUser }, SECRET_KEY , {expiresIn:"600s"});
+				return response.success(res, "user successfully login", [findUser, {token:token}]);
 			} else {
 				return response.error(res, "incorrect password");
 			}
-		});
-		
-		
-
-		
+		});	
 	} catch (err) {
 		return response.error(res, err.message);
 	}
