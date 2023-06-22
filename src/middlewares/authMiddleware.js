@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const {commonConstants} = require("../../constants/index");
+const {commonConstants} = require("../constants/common/common.keys");
 const {SECRET_KEY} = commonConstants;
 
 function authenticateToken(req, res, next) {
@@ -7,12 +7,12 @@ function authenticateToken(req, res, next) {
 	const token = authHeader && authHeader.split(" ")[1];
 
 	if (!token) {
-		return res.status(401).json({ error: "Token not found" });
+		return res.status(401).json({error: "Token not found"});
 	}
 
 	jwt.verify(token, SECRET_KEY, (err, user) => {
 		if (err) {
-			return res.status(403).json({ error: "Invalid token" });
+			return res.status(403).json({error: "Invalid token"});
 		}
 
 		req.user = user;
@@ -20,4 +20,4 @@ function authenticateToken(req, res, next) {
 	});
 }
 
-module.exports = { authenticateToken };
+module.exports = {authenticateToken};

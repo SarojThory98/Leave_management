@@ -1,7 +1,8 @@
-const { connectToMongoDb } = require("./src/db");
+const {connectToMongoDb} = require("./src/config/db.config.connection");
 const express = require("express");
 const corsMiddleware = require("./src/middlewares/corsMiddleware");
-const routes = require("./src/routes/User");
+const routes = require("./src/routes/index.route");
+const {commonConstants} = require("./src/constants/common/common.keys");
 const app = express();
 app.use(express.json());
 
@@ -11,9 +12,9 @@ connectToMongoDb();
 // Apply the CORS middleware
 app.use(corsMiddleware);
 
-// routes for all api
-app.use("/api", routes);
+// api routing
+routes(app);
 
-app.listen(5000, () => {
-	console.log("Server is running on PORT 5000");
+app.listen(commonConstants.PORT, () => {
+	console.log(`Server is running on PORT ${commonConstants.PORT}`);
 });
