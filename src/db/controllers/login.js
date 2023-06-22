@@ -29,7 +29,7 @@ const loginUser = async(req, res) => {
 		bcrypt.compare(password, findUser.password, (err, result) => {
 			if (result) {
 				const {SECRET_KEY} = commonConstants;
-				let token = jwt.sign({ findUser }, SECRET_KEY , {expiresIn:"600s"});
+				let token = jwt.sign({ userID:findUser._id }, SECRET_KEY , {expiresIn:"600s"});
 				return response.success(res, "user successfully login", [findUser, {token:token}]);
 			} else {
 				return response.error(res, "incorrect password");
