@@ -1,5 +1,24 @@
 # dotenv environment variables file
 .env
 
-# node_modules directory
+# node_modules folder
 node_modules/
+
+# Large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+# Applications
+*.app
+*.exe
+*.war
+
+# Log files
+*.log
+
+# Package files
+*.jar

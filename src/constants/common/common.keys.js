@@ -1,13 +1,12 @@
 const process = require("process");
 require("dotenv").config();
-const{
-	MONGODB_URI,
-	PORT
-} = process.env;
+const {MONGODB_URI, PORT, SECRET_KEY, JWT_EXPIRY} = process.env;
 const commonConstants = {
 	MONGODB_URI,
-	PORT
+	PORT,
+	SECRET_KEY,
+	JWT_EXPIRY,
 };
 module.exports = {
-	commonConstants
+	commonConstants,
 };

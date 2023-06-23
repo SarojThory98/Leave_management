@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const {commonConstants} = require("../constants/index");
-const { MONGODB_URI } = commonConstants;
+const {commonConstants} = require("../constants/common/common.keys");
+const {MONGODB_URI} = commonConstants;
 const connectToMongoDb = () => {
-	mongoose.connect(MONGODB_URI, {   
-		useNewUrlParser: true, 
-		useUnifiedTopology: true 
+	mongoose.connect(MONGODB_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
 	});
 	mongoose.connection.on("connected", () => {
 		console.log("MongoDb connected on port 27017 \n");
@@ -18,6 +18,5 @@ const connectToMongoDb = () => {
 };
 
 module.exports = {
-	connectToMongoDb
+	connectToMongoDb,
 };
-
