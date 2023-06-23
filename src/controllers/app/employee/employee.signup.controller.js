@@ -9,10 +9,10 @@ const jwt = require("jsonwebtoken");
 
 const registerEmployee = async (req, res) => {
 	try {
-		let {name, email, password, type} = req.body;
+		let {name, email, password} = req.body;
 
 		// joi validation
-		const result = await joiSignupSchema.empSchema.validate(req.body);
+		const result = await joiSignupSchema.employeeSignupSchema.validate(req.body);
 		if (result.error) {
 			return response.error(res, result.error.details);
 		}
@@ -23,7 +23,6 @@ const registerEmployee = async (req, res) => {
 			[USER_KEYS.NAME]: name,
 			[USER_KEYS.EMAIL]: email,
 			[USER_KEYS.PASSWORD]: hashedPassword,
-			[USER_KEYS.TYPE]: type,
 		};
 		const newEmployee = new User(newEmployeeObj);
 
@@ -36,8 +35,8 @@ const registerEmployee = async (req, res) => {
 		// Save the user to the database
 		const {SECRET_KEY} = commonConstants;
 		let token = jwt.sign({userExist}, SECRET_KEY, {expiresIn: commonConstants.JWT_EXPIRY});
-		await newEmployee.save().then((savedUser) => {
-			return response.success(res, API_MESSAGE.SIGNUP.SIGNUP_SUCCESS, [savedUser, {token: token}]);
+		await newEmployee.save().then(() => {
+			return response.success(res, API_MESSAGE.SIGNUP.SIGNUP_SUCCESS, {token: token});
 		});
 	} catch (err) {
 		return response.error(res, err.message);
