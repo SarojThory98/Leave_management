@@ -4,6 +4,7 @@ const API_MESSAGE = {
 	NOT_FOUND: "Resource trying to access, not found",
 	REQUEST_TIMEOUT: "Request Timeout",
 	UNAUTHORIZED: "Unauthorized access",
+	NOT_EXIST_TOKEN: "Authorization token is not provided",
 	LOGIN: {
 		USER_ALREADY_EXIST: "User Already Exists",
 		USER_NOT_FOUND: "User not found",
@@ -19,6 +20,10 @@ const API_MESSAGE = {
 		PASSWORD_UPDATED: "Password updated successfully",
 		TOKEN_EXPIRED: "Token expired",
 		USER_UPDATE: "User account updated successfully",
+	},
+	LEAVE_REQUEST: {
+		LEAVE_SUCCESS: "Leave request apllied successfully",
+		PENDING_REQUEST: "Past request pending. You can apply new leave when past request will approve",
 	},
 };
 
