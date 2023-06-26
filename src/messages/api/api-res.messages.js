@@ -24,6 +24,12 @@ const API_MESSAGE = {
 	LEAVE_REQUEST: {
 		LEAVE_SUCCESS: "Leave request apllied successfully",
 		PENDING_REQUEST: "Past request pending. You can apply new leave when past request will approve",
+		PAST_LEAVE_SUCCESS: "Successfully get user all leave requests",
+		NO_LEAVE_REQUEST: "User didn't apply any leave",
+	},
+	EMPLOYEE_LIST: {
+		GET_EMPLOYEE_SUCCESS: "Successfully get all employee list",
+		NO_EMPLOYEE: "There is no employee in the list",
 	},
 };
 
