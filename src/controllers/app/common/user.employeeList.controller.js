@@ -7,7 +7,7 @@ const {USER_TYPE_ENUM} = require("../../../constants/models/Enums/signUpEnums");
 const employeeList = async (req, res) => {
 	try {
 		const allEmployeeList = await User.find({[USER_KEYS.TYPE]: USER_TYPE_ENUM.EMPLOYEE});
-		if (allEmployeeList) {
+		if (allEmployeeList && allEmployeeList.length) {
 			return response.success(res, API_MESSAGE.EMPLOYEE_LIST.GET_EMPLOYEE_SUCCESS, allEmployeeList);
 		}
 		return response.error(res, API_MESSAGE.EMPLOYEE_LIST.NO_EMPLOYEE);
