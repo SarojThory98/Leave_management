@@ -17,14 +17,14 @@ const loginUser = async (req, res) => {
 		}
 
 		// check email and password to login
-		const findUser = await User.findOne({[USER_KEYS.EMAIL]: email}, {[USER_KEYS.EMAIL]: 1, [USER_KEYS.PASSWORD]: 1});
-		if (!findUser) {
+		const userDetails = await User.findOne({[USER_KEYS.EMAIL]: email}, {[USER_KEYS.EMAIL]: 1, [USER_KEYS.PASSWORD]: 1});
+		if (!userDetails) {
 			return response.error(res, API_MESSAGE.LOGIN.USER_NOT_EXISTS);
 		}
-		bcrypt.compare(password, findUser.password, (err, result) => {
+		bcrypt.compare(password, userDetails.password, (err, result) => {
 			if (result) {
 				const {SECRET_KEY} = commonConstants;
-				let token = jwt.sign({user: findUser}, SECRET_KEY, {expiresIn: commonConstants.JWT_EXPIRY});
+				let token = jwt.sign({user: userDetails}, SECRET_KEY, {expiresIn: commonConstants.JWT_EXPIRY});
 				return response.success(res, API_MESSAGE.LOGIN.LOGIN_SUCCESS, {token: token});
 			} else {
 				return response.error(res, API_MESSAGE.LOGIN.INVALID_PASSWORD);

@@ -14,9 +14,4 @@ module.exports = {
 		APPROVE: "approve",
 		REJECT: "reject",
 	},
-	LEAVE_REQUEST_SHIFT: {
-		FIRST_HALF: "first-half",
-		SECOND_HALF: "second-half",
-		FULL_DAY: "full-day",
-	},
 };

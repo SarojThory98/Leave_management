@@ -31,6 +31,20 @@ const API_MESSAGE = {
 		GET_EMPLOYEE_SUCCESS: "Successfully get all employee list",
 		NO_EMPLOYEE: "There is no employee in the list",
 	},
+	UPDATE_LEAVE_STATUS: {
+		UPDATE_LEAVE_STATUS_SUCCESS: "Successfully updated leave request status",
+		UPDATE_LEAVE_STATUS_ERROR: "Failed to update leave request status",
+		EMPLOYEE_USER_TYPE: "User not found or does not have the employee type",
+		HR_USER_TYPE: "User not found or does not have the HR type",
+	},
+	PUBLIC_HOLIDAY: {
+		ADD_HOLIDAY_SUCCESS: "Successfully public holiday added",
+		HOLIDAY_ALREADY_EXIST: "Holiday date already added",
+		UPDATE_SUCCESS: "Public holiday updated successfully",
+		UPDATE_ERROR: "Public holiday updation error",
+		DELETE_SUCCESS: "Public holiday deleted successfully",
+		DELETE_ERROR: "Public holiday deletion error",
+	},
 };
 
 module.exports = {
