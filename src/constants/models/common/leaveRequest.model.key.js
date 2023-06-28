@@ -14,4 +14,5 @@ module.exports = {
 		APPROVE: "approve",
 		REJECT: "reject",
 	},
+	LEAVE_LIMIT: 2,
 };

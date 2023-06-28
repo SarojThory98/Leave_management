@@ -17,9 +17,12 @@ const loginUser = async (req, res) => {
 		}
 
 		// check email and password to login
-		const userDetails = await User.findOne({[USER_KEYS.EMAIL]: email}, {[USER_KEYS.EMAIL]: 1, [USER_KEYS.PASSWORD]: 1});
+		const userDetails = await User.findOne({[USER_KEYS.EMAIL]: email});
 		if (!userDetails) {
 			return response.error(res, API_MESSAGE.LOGIN.USER_NOT_EXISTS);
+		}
+		if (userDetails && userDetails.status != 1) {
+			return response.error(res, API_MESSAGE.LOGIN.STATUS_NOT_APPROVED);
 		}
 		bcrypt.compare(password, userDetails.password, (err, result) => {
 			if (result) {

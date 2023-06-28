@@ -22,6 +22,12 @@ const editHoliday = require("../../controllers/app/hr/updatePublicHoliday.contro
 const {updatePublicHoliday} = editHoliday;
 const holidayDeletion = require("../../controllers/app/hr/deletePublicHoliday.controller");
 const {deletePublicHoliday} = holidayDeletion;
+const employeeStatus = require("../../controllers/app/hr/updateEmployeeStatus.controller");
+const {updateEmployeeStatus} = employeeStatus;
+const holidayListController = require("../../controllers/app/common/publicHolidayList.controller");
+const {holidayList} = holidayListController;
+const removeEmployeeController = require("../../controllers/app/common/removeEmployee.controller");
+const {removeEmployee} = removeEmployeeController;
 
 hrRouter.post("/hr/login", authUser([USER_TYPE_ENUM.HR]), loginUser);
 hrRouter.post("/hr/leave-request", verifyToken([USER_TYPE_ENUM.HR]), userLeaveRequest);
@@ -31,4 +37,8 @@ hrRouter.patch("/hr/update-employee-leave-status/:id", [verifyToken([USER_TYPE_E
 hrRouter.post("/hr/add-public-holiday", verifyToken([USER_TYPE_ENUM.HR]), addPublicHoliday);
 hrRouter.patch("/hr/edit-public-holiday/:id", verifyToken([USER_TYPE_ENUM.HR]), updatePublicHoliday);
 hrRouter.delete("/hr/delete-public-holiday/:id", verifyToken([USER_TYPE_ENUM.HR]), deletePublicHoliday);
+hrRouter.patch("/hr/edit-employee-status/:id", verifyToken([USER_TYPE_ENUM.HR]), updateEmployeeStatus);
+hrRouter.get("/hr/public-holiday-list", verifyToken([USER_TYPE_ENUM.HR]), holidayList);
+hrRouter.delete("/hr/remove-employee/:id", verifyToken([USER_TYPE_ENUM.HR]), removeEmployee);
+
 module.exports = hrRouter;

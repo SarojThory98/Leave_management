@@ -4,6 +4,13 @@ const USER_TYPE_ENUM = {
 	EMPLOYEE: 2,
 };
 
+const EMPLOYEE_SIGNUP_STATUS = {
+	PENDING: 0,
+	APPROVE: 1,
+	REJECT: 2,
+};
+
 module.exports = {
 	USER_TYPE_ENUM,
+	EMPLOYEE_SIGNUP_STATUS,
 };

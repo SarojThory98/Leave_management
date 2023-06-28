@@ -4,6 +4,9 @@ const {Leave_Request} = require("../../../models/leave_request/index.leave_reque
 const {Types} = require("mongoose");
 const {API_MESSAGE} = require("../../../messages/api/api-res.messages");
 const {LEAVE_REQUEST_KEYS} = require("../../../constants/models/common/leaveRequest.model.key");
+const {Leave_Bank} = require("../../../models/leave_bank/index.leave_bank.model");
+const {LEAVE_BANK_KEYS} = require("../../../constants/models/common/leaveBank.model.key");
+const {LEAVE_REQUEST_STATUS_ENUM} = require("../../../constants/models/Enums/leaveRequest.emuns");
 
 const updateLeaveStatus = async (req, res) => {
 	try {
@@ -20,8 +23,15 @@ const updateLeaveStatus = async (req, res) => {
 		if (!updatedLeaveRequest) {
 			return response.error(res, API_MESSAGE.UPDATE_LEAVE_STATUS.UPDATE_LEAVE_STATUS_ERROR);
 		}
+		const startDate = new Date(updatedLeaveRequest.startDateTime);
+		const endDate = new Date(updatedLeaveRequest.endDateTime);
+		const timeDiff = endDate - startDate;
+		const days = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
 
-		return response.success(res, API_MESSAGE.UPDATE_LEAVE_STATUS.UPDATE_LEAVE_STATUS_SUCCESS);
+		if (status == LEAVE_REQUEST_STATUS_ENUM.APPROVE) {
+			await Leave_Bank.findOneAndUpdate({[LEAVE_BANK_KEYS.USER_ID]: new Types.ObjectId(userID)}, {[LEAVE_BANK_KEYS.LEAVE_QUANTITY]: days}, {new: true});
+		}
+		return response.success(res, days);
 	} catch (err) {
 		return response.error(res, err.message);
 	}

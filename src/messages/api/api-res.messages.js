@@ -12,6 +12,7 @@ const API_MESSAGE = {
 		LOGIN_SUCCESS: "User login successfully",
 		USER_NOT_EXISTS: "User does not exists..please signup",
 		TOKEN_NOT_EXISTS: "Token does not exists",
+		STATUS_NOT_APPROVED: "User status is not approved",
 		TOKEN_EXPIRED: "Token expired",
 	},
 	SIGNUP: {
@@ -20,12 +21,20 @@ const API_MESSAGE = {
 		PASSWORD_UPDATED: "Password updated successfully",
 		TOKEN_EXPIRED: "Token expired",
 		USER_UPDATE: "User account updated successfully",
+		REMOVE_USER_SUCCESS: "Employee removed successfully",
+		REMOVE_USER_ERROR: "Employee deletion error",
+	},
+	UPDATE_EMPLOYEE_STATUS: {
+		UPDATE_STATUS_SUCCESSS: "Employee status updated successfully",
+		UPDATE_STATUS_ERROR: "Employee status updation error",
 	},
 	LEAVE_REQUEST: {
 		LEAVE_SUCCESS: "Leave request apllied successfully",
 		PENDING_REQUEST: "Past request pending. You can apply new leave when past request will approve",
 		PAST_LEAVE_SUCCESS: "Successfully get user all leave requests",
 		NO_LEAVE_REQUEST: "User didn't apply any leave",
+		EXCEEDED_LEAVE_LIMIT: "Leave days can't be grater than 2",
+		EXCEEDED_LEAVE_BANK_LIMIT: "Leave bank has lower limit",
 	},
 	EMPLOYEE_LIST: {
 		GET_EMPLOYEE_SUCCESS: "Successfully get all employee list",
@@ -44,6 +53,14 @@ const API_MESSAGE = {
 		UPDATE_ERROR: "Public holiday updation error",
 		DELETE_SUCCESS: "Public holiday deleted successfully",
 		DELETE_ERROR: "Public holiday deletion error",
+		GET_PUBLIC_HOLIDAY_SUCCESS: "Holiday list get successfully",
+		GET_PUBLIC_HOLIDAY_ERROR: "Holiday list error",
+	},
+	LEAVE_BANK: {
+		LEAVE_BANK_ADD_SUCCESS: "User leave bank added successfully",
+		LEAVE_BANK_EXIST: "User leave bank already exist",
+		LEAVE_BANK_DELETE: "User leave bank deleted successfully",
+		NO_RESPONSE: "you have provided pending and reject status and leave-bank doesn't exist",
 	},
 };
 
