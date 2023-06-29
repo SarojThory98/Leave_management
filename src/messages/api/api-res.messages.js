@@ -22,11 +22,19 @@ const API_MESSAGE = {
 		TOKEN_EXPIRED: "Token expired",
 		USER_UPDATE: "User account updated successfully",
 		REMOVE_USER_SUCCESS: "Employee removed successfully",
-		REMOVE_USER_ERROR: "Employee deletion error",
+		REMOVE_USER_ERROR: "No document matched the filter, nothing was deleted",
+	},
+	LOGOUT: {
+		LOGOUT_SUCCESS: "User logout successfully",
+		LOGOUT_ERROR: "User logout error",
 	},
 	UPDATE_EMPLOYEE_STATUS: {
 		UPDATE_STATUS_SUCCESSS: "Employee status updated successfully",
 		UPDATE_STATUS_ERROR: "Employee status updation error",
+	},
+	UPDATE_USER_INFORMATION: {
+		UPDATION_SUCCESS: "User information successfully updated",
+		UPDATION_ERROR: "User information updation error",
 	},
 	LEAVE_REQUEST: {
 		LEAVE_SUCCESS: "Leave request apllied successfully",
@@ -45,6 +53,7 @@ const API_MESSAGE = {
 		UPDATE_LEAVE_STATUS_ERROR: "Failed to update leave request status",
 		EMPLOYEE_USER_TYPE: "User not found or does not have the employee type",
 		HR_USER_TYPE: "User not found or does not have the HR type",
+		SAME_STATUS: "Past leave status is already same",
 	},
 	PUBLIC_HOLIDAY: {
 		ADD_HOLIDAY_SUCCESS: "Successfully public holiday added",
@@ -54,13 +63,13 @@ const API_MESSAGE = {
 		DELETE_SUCCESS: "Public holiday deleted successfully",
 		DELETE_ERROR: "Public holiday deletion error",
 		GET_PUBLIC_HOLIDAY_SUCCESS: "Holiday list get successfully",
-		GET_PUBLIC_HOLIDAY_ERROR: "Holiday list error",
+		GET_PUBLIC_HOLIDAY_ERROR: "No public holiday",
 	},
 	LEAVE_BANK: {
 		LEAVE_BANK_ADD_SUCCESS: "User leave bank added successfully",
 		LEAVE_BANK_EXIST: "User leave bank already exist",
 		LEAVE_BANK_DELETE: "User leave bank deleted successfully",
-		NO_RESPONSE: "you have provided pending and reject status and leave-bank doesn't exist",
+		NO_RESPONSE: "leave-bank already exist",
 	},
 };
 

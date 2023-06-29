@@ -1,4 +1,4 @@
-const {User} = require("../models/user/user.model");
+const {user} = require("../models/user/user.model");
 const {commonConstants} = require("../constants/common/common.keys");
 const {SECRET_KEY} = commonConstants;
 const response = require("../utils/api/api-response-handler.utils");
@@ -20,9 +20,9 @@ const verifyToken = (permission) => {
 			// Store the email in the request object for future use
 			req.userId = decodedToken;
 
-			const findUser = await User.findOne({[USER_KEYS.EMAIL]: userEmail});
+			const userDetail = await user.findOne({[USER_KEYS.EMAIL]: userEmail});
 
-			if (permission.includes(findUser.type)) {
+			if (permission.includes(userDetail.type)) {
 				next();
 			} else {
 				return response.error(res, API_MESSAGE.UNAUTHORIZED);

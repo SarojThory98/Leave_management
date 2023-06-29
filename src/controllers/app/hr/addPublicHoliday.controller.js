@@ -1,5 +1,5 @@
 const response = require("../../../utils/api/api-response-handler.utils");
-const {Public_Holiday} = require("../../../models/public_holiday/index.public_holiday.model");
+const {publicHoliday} = require("../../../models/public_holiday/index.public_holiday.model");
 const {API_MESSAGE} = require("../../../messages/api/api-res.messages");
 const joiPublicHolidaySchema = require("../../../validation/app/hr/publicHoliday.validation");
 const {PUBLIC_HOLIDAY_KEYS} = require("../../../constants/models/hr/publicHoliday.model.key");
@@ -15,7 +15,7 @@ const addPublicHoliday = async (req, res) => {
 		const {holiday_date, description} = req.body;
 
 		// holiday_date validation
-		const publicHolidayExist = await Public_Holiday.findOne({[PUBLIC_HOLIDAY_KEYS.HOLIDAY_DATE]: holiday_date});
+		const publicHolidayExist = await publicHoliday.findOne({[PUBLIC_HOLIDAY_KEYS.HOLIDAY_DATE]: holiday_date});
 		if (publicHolidayExist) {
 			return response.error(res, API_MESSAGE.PUBLIC_HOLIDAY.HOLIDAY_ALREADY_EXIST);
 		}
@@ -25,7 +25,7 @@ const addPublicHoliday = async (req, res) => {
 			[PUBLIC_HOLIDAY_KEYS.HOLIDAY_DATE]: holiday_date,
 			[PUBLIC_HOLIDAY_KEYS.DESCRIPTION]: description,
 		};
-		const newPublicHoliday = new Public_Holiday(newHolidayObj);
+		const newPublicHoliday = new publicHoliday(newHolidayObj);
 
 		// Save the user to the database
 		await newPublicHoliday.save().then(() => {

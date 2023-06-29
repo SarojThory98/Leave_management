@@ -1,7 +1,7 @@
 const express = require("express");
 const hrRouter = express.Router();
 const loginHrController = require("../../controllers/app/common/user.login.controller");
-const {authUser} = require("../../middlewares/roleManagement");
+const {authUser, leaveStatus} = require("../../middlewares/roleManagement");
 const {loginUser} = loginHrController;
 const {USER_TYPE_ENUM} = require("../../constants/models/Enums/signUpEnums");
 const leaveRequestController = require("../../controllers/app/common/user.leaveRequest.controller");
@@ -14,8 +14,8 @@ const allEmployeeList = require("../../controllers/app/common/user.employeeList.
 const {employeeList} = allEmployeeList;
 const updateEmployeeLeaveStatus = require("../../controllers/app/common/user.UpdateLeaveStatus.controller");
 const {updateLeaveStatus} = updateEmployeeLeaveStatus;
-const leaveRequestStatus = require("../../middlewares/leaveStatusMiddleware");
-const {leaveStatus} = leaveRequestStatus;
+// const leaveRequestStatus = require("../../middlewares/leaveStatusMiddleware");
+// const {leaveStatus} = leaveRequestStatus;
 const addHoliday = require("../../controllers/app/hr/addPublicHoliday.controller");
 const {addPublicHoliday} = addHoliday;
 const editHoliday = require("../../controllers/app/hr/updatePublicHoliday.controller");
@@ -28,6 +28,10 @@ const holidayListController = require("../../controllers/app/common/publicHolida
 const {holidayList} = holidayListController;
 const removeEmployeeController = require("../../controllers/app/common/removeEmployee.controller");
 const {removeEmployee} = removeEmployeeController;
+const updateUserController = require("../../controllers/app/common/user.updateRegistration.controller");
+const {updateUserInformation} = updateUserController;
+const logoutUserController = require("../../controllers/app/common/user.logout.controller");
+const {logoutUser} = logoutUserController;
 
 hrRouter.post("/hr/login", authUser([USER_TYPE_ENUM.HR]), loginUser);
 hrRouter.post("/hr/leave-request", verifyToken([USER_TYPE_ENUM.HR]), userLeaveRequest);
@@ -40,5 +44,7 @@ hrRouter.delete("/hr/delete-public-holiday/:id", verifyToken([USER_TYPE_ENUM.HR]
 hrRouter.patch("/hr/edit-employee-status/:id", verifyToken([USER_TYPE_ENUM.HR]), updateEmployeeStatus);
 hrRouter.get("/hr/public-holiday-list", verifyToken([USER_TYPE_ENUM.HR]), holidayList);
 hrRouter.delete("/hr/remove-employee/:id", verifyToken([USER_TYPE_ENUM.HR]), removeEmployee);
+hrRouter.patch("/hr/edit-user-information", verifyToken([USER_TYPE_ENUM.HR]), updateUserInformation);
+hrRouter.get("/hr/logout", verifyToken([USER_TYPE_ENUM.HR]), logoutUser);
 
 module.exports = hrRouter;

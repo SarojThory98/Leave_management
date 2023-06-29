@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const {USER_KEYS} = require("../../constants/models/employee/employee.model.key");
 const {USER_TYPE_ENUM, EMPLOYEE_SIGNUP_STATUS} = require("../../constants/models/Enums/signUpEnums");
+const {COMMON_MODEL_KEYS} = require("../../constants/models/common/common.model.key");
 const userSchema = new mongoose.Schema(
 	{
 		[USER_KEYS.NAME]: {
@@ -18,16 +19,16 @@ const userSchema = new mongoose.Schema(
 		[USER_KEYS.TYPE]: {
 			type: Number,
 			trim: true,
-			enum: [USER_TYPE_ENUM.MANAGEMENT, USER_TYPE_ENUM.HR, USER_TYPE_ENUM.EMPLOYEE],
+			enum: Object.values(USER_TYPE_ENUM),
 			default: USER_TYPE_ENUM.EMPLOYEE,
 		},
 		[USER_KEYS.STATUS]: {
 			type: Number,
 			trim: true,
-			enum: [EMPLOYEE_SIGNUP_STATUS.PENDING, EMPLOYEE_SIGNUP_STATUS.APPROVE, EMPLOYEE_SIGNUP_STATUS.REJECT],
+			enum: Object.values(EMPLOYEE_SIGNUP_STATUS),
 			default: EMPLOYEE_SIGNUP_STATUS.PENDING,
 		},
-		[USER_KEYS.CREATED_BY]: {
+		[COMMON_MODEL_KEYS.CREATED_BY]: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 			default: "default-user",
@@ -36,5 +37,5 @@ const userSchema = new mongoose.Schema(
 	{timestamps: true},
 );
 module.exports = {
-	User: mongoose.model("User", userSchema),
+	user: mongoose.model("user", userSchema),
 };

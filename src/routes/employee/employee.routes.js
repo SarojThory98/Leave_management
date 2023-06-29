@@ -10,6 +10,10 @@ const userAuth = require("../../middlewares/authMiddleware");
 const {verifyToken} = userAuth;
 const holidayListController = require("../../controllers/app/common/publicHolidayList.controller");
 const {holidayList} = holidayListController;
+const updateUserController = require("../../controllers/app/common/user.updateRegistration.controller");
+const {updateUserInformation} = updateUserController;
+const logoutUserController = require("../../controllers/app/common/user.logout.controller");
+const {logoutUser} = logoutUserController;
 
 const {registerEmployee} = signupController;
 const {loginUser} = loginEmployeeController;
@@ -21,5 +25,7 @@ employeeRouter.post("/employee/login", authUser([USER_TYPE_ENUM.EMPLOYEE]), logi
 employeeRouter.post("/employee/leave-request", verifyToken([USER_TYPE_ENUM.EMPLOYEE]), userLeaveRequest);
 employeeRouter.get("/employee/leave-request-list", verifyToken([USER_TYPE_ENUM.EMPLOYEE]), leaveRequestList);
 employeeRouter.get("/employee/public-holiday-list", verifyToken([USER_TYPE_ENUM.EMPLOYEE]), holidayList);
+employeeRouter.patch("/employee/edit-user-information", verifyToken([USER_TYPE_ENUM.EMPLOYEE]), updateUserInformation);
+employeeRouter.get("/employee/logout", verifyToken([USER_TYPE_ENUM.EMPLOYEE]), logoutUser);
 
 module.exports = employeeRouter;

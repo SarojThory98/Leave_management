@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const {LEAVE_REQUEST_KEYS} = require("../../constants/models/common/leaveRequest.model.key");
 const {LEAVE_REQUEST_STATUS_ENUM} = require("../../constants/models/Enums/leaveRequest.emuns");
+const {COMMON_MODEL_KEYS} = require("../../constants/models/common/common.model.key");
 const leaveRequestSchema = new mongoose.Schema(
 	{
-		[LEAVE_REQUEST_KEYS.USER_ID]: {
+		[COMMON_MODEL_KEYS.USER_ID]: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 		},
@@ -24,10 +25,10 @@ const leaveRequestSchema = new mongoose.Schema(
 		[LEAVE_REQUEST_KEYS.STATUS]: {
 			type: Number,
 			trim: true,
-			enum: [LEAVE_REQUEST_STATUS_ENUM.PENDING, LEAVE_REQUEST_STATUS_ENUM.APPROVE, LEAVE_REQUEST_STATUS_ENUM.REJECT],
+			enum: Object.values(LEAVE_REQUEST_STATUS_ENUM),
 			default: LEAVE_REQUEST_STATUS_ENUM.PENDING,
 		},
-		[LEAVE_REQUEST_KEYS.CREATED_BY]: {
+		[COMMON_MODEL_KEYS.CREATED_BY]: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 			default: "default-user",
@@ -36,5 +37,5 @@ const leaveRequestSchema = new mongoose.Schema(
 	{timestamps: true},
 );
 module.exports = {
-	Leave_Request: mongoose.model("Leave_Request", leaveRequestSchema),
+	leaveRequest: mongoose.model("leaveRequest", leaveRequestSchema),
 };

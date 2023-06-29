@@ -1,4 +1,4 @@
-const {User} = require("../../../models/user/user.model");
+const {user} = require("../../../models/user/user.model");
 const {USER_KEYS} = require("../../../constants/models/employee/employee.model.key");
 const response = require("../../../utils/api/api-response-handler.utils");
 const joiSignupSchema = require("../../../validation/app/employee/signup.validation");
@@ -12,7 +12,7 @@ const registerEmployee = async (req, res) => {
 		let {name, email, password} = req.body;
 
 		// joi validation
-		const result = await joiSignupSchema.employeeSignupSchema.validate(req.body);
+		const result = joiSignupSchema.employeeSignupSchema.validate(req.body);
 		if (result.error) {
 			return response.error(res, result.error.details);
 		}
@@ -24,10 +24,10 @@ const registerEmployee = async (req, res) => {
 			[USER_KEYS.EMAIL]: email,
 			[USER_KEYS.PASSWORD]: hashedPassword,
 		};
-		const newEmployee = new User(newEmployeeObj);
+		const newEmployee = new user(newEmployeeObj);
 
 		// email validation
-		const userExist = await User.findOne({[USER_KEYS.EMAIL]: email});
+		const userExist = await user.findOne({[USER_KEYS.EMAIL]: email});
 		if (userExist) {
 			return response.error(res, API_MESSAGE.SIGNUP.USER_ALREADY_EXIST);
 		}

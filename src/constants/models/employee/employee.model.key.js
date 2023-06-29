@@ -5,8 +5,5 @@ module.exports = {
 		PASSWORD: "password",
 		TYPE: "type",
 		STATUS: "status",
-		CREATED_AT: "createdAt",
-		CREATED_BY: "createdBy",
-		UPDATED_AT: "updatedAt",
 	},
 };

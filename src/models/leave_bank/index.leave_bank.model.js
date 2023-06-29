@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const {LEAVE_BANK_KEYS} = require("../../constants/models/common/leaveBank.model.key");
+const {COMMON_MODEL_KEYS} = require("../../constants/models/common/common.model.key");
 const leaveBankSchema = new mongoose.Schema(
 	{
-		[LEAVE_BANK_KEYS.USER_ID]: {
+		[COMMON_MODEL_KEYS.USER_ID]: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 		},
@@ -11,7 +12,7 @@ const leaveBankSchema = new mongoose.Schema(
 			trim: true,
 			default: 2,
 		},
-		[LEAVE_BANK_KEYS.CREATED_BY]: {
+		[COMMON_MODEL_KEYS.CREATED_BY]: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 			default: "default-user",
@@ -20,5 +21,5 @@ const leaveBankSchema = new mongoose.Schema(
 	{timestamps: true},
 );
 module.exports = {
-	Leave_Bank: mongoose.model("Leave_Bank", leaveBankSchema),
+	leaveBank: mongoose.model("leaveBank", leaveBankSchema),
 };

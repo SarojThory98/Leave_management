@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {PUBLIC_HOLIDAY_KEYS} = require("../../constants/models/hr/publicHoliday.model.key");
+const {COMMON_MODEL_KEYS} = require("../../constants/models/common/common.model.key");
 const publicHolidaySchema = new mongoose.Schema(
 	{
 		[PUBLIC_HOLIDAY_KEYS.HOLIDAY_DATE]: {
@@ -11,7 +12,7 @@ const publicHolidaySchema = new mongoose.Schema(
 			type: String,
 			trim: true,
 		},
-		[PUBLIC_HOLIDAY_KEYS.CREATED_BY]: {
+		[COMMON_MODEL_KEYS.CREATED_BY]: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 			default: "default-user",
@@ -20,5 +21,5 @@ const publicHolidaySchema = new mongoose.Schema(
 	{timestamps: true},
 );
 module.exports = {
-	Public_Holiday: mongoose.model("Public_Holiday", publicHolidaySchema),
+	publicHoliday: mongoose.model("publicHoliday", publicHolidaySchema),
 };
