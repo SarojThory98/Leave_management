@@ -26,38 +26,29 @@ const userLeaveRequest = async (req, res) => {
 
 		// count leave days in start date and end date
 		let {startDateTime, endDateTime, comment} = req.body;
-		const holidays = await publicHoliday.find({}).lean();
+		const holidays = await publicHoliday.find({});
+		const formattedHolidays = holidays.map((h) => h.holiday_date.toISOString().split("T")[0]);
+		const weekendDays = new Set([0, 6]);
 
-		let currentDate = new Date(startDateTime); // Set the current date
-		let targetDate = new Date(endDateTime); // Set the target date
-		let LeaveDays = 0;
+		let currentDate = new Date(startDateTime);
+		let targetDate = new Date(endDateTime);
+		let leaveDays = 0;
 
 		while (currentDate <= targetDate) {
-			const formattedDate = currentDate.toISOString().split("T")[0]; // Format currentDate
-
-			const isWeekend = (date) => {
-				const day = date.getDay();
-				return day === 0 || day === 6;
-			};
-
-			const dateExists = holidays.some((holiday) => {
-				const formattedHolidayDate = holiday.holiday_date.toISOString().split("T")[0];
-				return formattedHolidayDate === formattedDate;
-			});
-
-			if (!isWeekend(currentDate) && !dateExists) {
-				LeaveDays++;
+			if (!weekendDays.has(currentDate.getDay()) && !formattedHolidays.includes(currentDate.toISOString().split("T")[0])) {
+				leaveDays++;
 			}
 
 			currentDate.setDate(currentDate.getDate() + 1);
 		}
-		if (LeaveDays > LEAVE_LIMIT) {
+
+		if (leaveDays > LEAVE_LIMIT) {
 			return response.error(res, API_MESSAGE.LEAVE_REQUEST.EXCEEDED_LEAVE_LIMIT);
 		}
 
 		// check user leave bank sufficient or not
 		const userLeaveBank = await leaveBank.findOne({[COMMON_MODEL_KEYS.USER_ID]: new Types.ObjectId(req.userId.user._id)});
-		if (userLeaveBank.leave_quantity < LeaveDays) {
+		if (userLeaveBank.leave_quantity < leaveDays) {
 			return response.error(res, API_MESSAGE.LEAVE_REQUEST.EXCEEDED_LEAVE_BANK_LIMIT);
 		}
 
